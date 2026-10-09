@@ -56,6 +56,7 @@ public:
     void delete_node(const Goat& value);
     void print();
     void print_reverse();
+    void clear();
     ~DoublyLinkedList();
 };
 
@@ -192,7 +193,10 @@ void DoublyLinkedList::delete_node(const Goat& value) {
 
 void DoublyLinkedList::print() {
     Node* current = head;
-    if (!current) return;
+    if (!current) {
+        cout << "List is empty" << endl;
+        return;
+    }
     while (current) {
         current->data.print();
         current = current->next;
@@ -201,17 +205,25 @@ void DoublyLinkedList::print() {
 
 void DoublyLinkedList::print_reverse() {
     Node* current = tail;
-    if (!current) return;
+    if (!current) {
+        cout << "List is empty" << endl;
+        return;
+    }
     while (current) {
         current->data.print();
         current = current->prev;
     }
 }
 
-DoublyLinkedList::~DoublyLinkedList() {
+void DoublyLinkedList::clear() {
     while (head) {
         Node* temp = head;
         head = head->next;
         delete temp;
     }
+    tail = nullptr;
+}
+
+DoublyLinkedList::~DoublyLinkedList() {
+    clear();
 }
